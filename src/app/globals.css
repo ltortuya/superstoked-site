@@ -1,0 +1,72 @@
+@import "tailwindcss";
+
+@theme {
+  --color-ocean-deep: #0B3954;
+  --color-ocean-mid: #087E8B;
+  --color-ocean-light: #BFD7EA;
+  --color-sand: #F2E9DC;
+  --color-sand-dark: #E4D5BE;
+  --color-foam: #FFFFFF;
+  --color-sunset: #E85D4E;
+  --color-sunset-dark: #C94939;
+  --color-ink: #1A2639;
+  --color-ink-soft: #3E4C59;
+  --color-muted: #7C8A97;
+
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+  --font-display: var(--font-fraunces), Georgia, serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--color-foam);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Skip link (a11y) */
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 8px;
+  background: var(--color-ocean-deep);
+  color: #fff;
+  padding: 8px 16px;
+  z-index: 100;
+  border-radius: 6px;
+  transition: top 0.2s;
+}
+.skip-link:focus {
+  top: 8px;
+}
+
+/* Focus ring consistency */
+*:focus-visible {
+  outline: 2px solid var(--color-ocean-mid);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* Subtle wave divider helper */
+.wave-divider {
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 80' preserveAspectRatio='none'><path fill='%23F2E9DC' d='M0,32L60,37.3C120,43,240,53,360,58.7C480,64,600,64,720,53.3C840,43,960,21,1080,21.3C1200,21,1320,43,1380,53.3L1440,64L1440,80L0,80Z'/></svg>");
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+}
+
+/* Decorative ocean gradient used on hero */
+.ocean-gradient {
+  background: radial-gradient(1200px 600px at 80% 10%, rgba(8, 126, 139, 0.35), transparent 60%),
+    radial-gradient(900px 500px at 10% 80%, rgba(11, 57, 84, 0.55), transparent 55%),
+    linear-gradient(180deg, #062a3e 0%, #0B3954 45%, #0d4a6b 100%);
+}
+
+/* Reduced motion: disable our reveal transforms */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+}
