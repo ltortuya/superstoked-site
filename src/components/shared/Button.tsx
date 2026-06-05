@@ -15,7 +15,7 @@ const variants: Record<Variant, string> = {
   ghost:
     "bg-transparent text-ocean-deep hover:bg-ocean-deep/5 active:scale-[0.99]",
   sunset:
-    "bg-sunset text-foam hover:bg-sunset-dark hover:scale-[1.02] active:scale-[0.99] shadow-sm hover:shadow-md",
+    "bg-sunset text-ink hover:bg-sunset-dark hover:scale-[1.02] active:scale-[0.99] shadow-sm hover:shadow-md",
 };
 
 const sizes: Record<Size, string> = {
