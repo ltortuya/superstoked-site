@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Inter, Sora } from "next/font/google";
 import "./globals.css";
 import { site } from "@/lib/site";
+import { Analytics } from "@/components/analytics/Analytics";
+import { ConsentBanner } from "@/components/analytics/ConsentBanner";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -57,7 +59,11 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en" className={`${inter.variable} ${sora.variable}`}>
-      <body className="min-h-screen flex flex-col bg-foam text-ink">{children}</body>
+      <body className="min-h-screen flex flex-col bg-foam text-ink">
+        {children}
+        <Analytics />
+        <ConsentBanner />
+      </body>
     </html>
   );
 }
