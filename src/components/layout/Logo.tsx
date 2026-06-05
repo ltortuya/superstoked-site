@@ -1,31 +1,19 @@
 import Link from "next/link";
+import Image from "next/image";
 
-// Wordmark-style logo. Replace with an SVG/image when real branding exists.
+// Brand logo. White (outlined) over dark/hero; navy over light/scrolled chrome.
 export function Logo({ tone = "dark" }: { tone?: "dark" | "light" }) {
-  const color = tone === "light" ? "text-foam" : "text-ocean-deep";
-  const accent = tone === "light" ? "text-ocean-light" : "text-ocean-mid";
+  const src = tone === "light" ? "/brand/logo-super-white.png" : "/brand/logo-super-navy.png";
   return (
-    <Link href="/" className={`inline-flex items-center gap-2 group`} aria-label="Superstoked Foundation — home">
-      <span
-        aria-hidden="true"
-        className={`flex h-9 w-9 items-center justify-center rounded-full bg-gradient-to-br from-ocean-mid to-ocean-deep shadow-sm transition-transform group-hover:scale-105`}
-      >
-        <svg
-          viewBox="0 0 24 24"
-          className="h-5 w-5"
-          fill="none"
-          stroke="white"
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        >
-          <path d="M2 12c2.5-3 5-3 7.5 0s5 3 7.5 0 5-3 7 0" />
-          <path d="M2 17c2.5-3 5-3 7.5 0s5 3 7.5 0 5-3 7 0" />
-        </svg>
-      </span>
-      <span className={`font-display text-lg leading-none tracking-tight ${color}`}>
-        Superstoked<span className={accent}>.</span>
-      </span>
+    <Link href="/" aria-label="Superstoked Foundation — home" className="inline-flex items-center">
+      <Image
+        src={src}
+        alt="Superstoked Foundation"
+        width={160}
+        height={56}
+        priority
+        className="h-11 w-auto sm:h-12"
+      />
     </Link>
   );
 }
