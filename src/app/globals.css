@@ -1,20 +1,22 @@
 @import "tailwindcss";
 
 @theme {
-  --color-ocean-deep: #0B3954;
-  --color-ocean-mid: #087E8B;
-  --color-ocean-light: #BFD7EA;
-  --color-sand: #F2E9DC;
-  --color-sand-dark: #E4D5BE;
+  /* Live SSF brand. Token NAMES are unchanged so component classes keep working;
+     only the VALUES move to the brand palette. */
+  --color-ocean-deep: #1B2D4E;  /* navy — primary dark surfaces/text */
+  --color-ocean-mid: #4A6E8A;   /* steel — hovers, focus ring, logo accents */
+  --color-ocean-light: #B5D5DD; /* seafoam — light accents */
+  --color-sand: #F5EFE2;        /* cream — soft section backgrounds */
+  --color-sand-dark: #DDC9A0;   /* sand */
   --color-foam: #FFFFFF;
-  --color-sunset: #E85D4E;
-  --color-sunset-dark: #C94939;
-  --color-ink: #1A2639;
-  --color-ink-soft: #3E4C59;
+  --color-sunset: #F4B423;      /* gold — CTAs/accent (was coral) */
+  --color-sunset-dark: #D99A12; /* gold hover */
+  --color-ink: #0F1F35;
+  --color-ink-soft: #3A4A63;
   --color-muted: #7C8A97;
 
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
-  --font-display: var(--font-fraunces), Georgia, serif;
+  --font-display: var(--font-sora), ui-sans-serif, system-ui, sans-serif;
 }
 
 html {
@@ -54,16 +56,16 @@ body {
 
 /* Subtle wave divider helper */
 .wave-divider {
-  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 80' preserveAspectRatio='none'><path fill='%23F2E9DC' d='M0,32L60,37.3C120,43,240,53,360,58.7C480,64,600,64,720,53.3C840,43,960,21,1080,21.3C1200,21,1320,43,1380,53.3L1440,64L1440,80L0,80Z'/></svg>");
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 80' preserveAspectRatio='none'><path fill='%23F5EFE2' d='M0,32L60,37.3C120,43,240,53,360,58.7C480,64,600,64,720,53.3C840,43,960,21,1080,21.3C1200,21,1320,43,1380,53.3L1440,64L1440,80L0,80Z'/></svg>");
   background-size: 100% 100%;
   background-repeat: no-repeat;
 }
 
 /* Decorative ocean gradient used on hero */
 .ocean-gradient {
-  background: radial-gradient(1200px 600px at 80% 10%, rgba(8, 126, 139, 0.35), transparent 60%),
-    radial-gradient(900px 500px at 10% 80%, rgba(11, 57, 84, 0.55), transparent 55%),
-    linear-gradient(180deg, #062a3e 0%, #0B3954 45%, #0d4a6b 100%);
+  background: radial-gradient(1200px 600px at 80% 10%, rgba(74,110,138,0.35), transparent 60%),
+    radial-gradient(900px 500px at 10% 80%, rgba(27,45,78,0.55), transparent 55%),
+    linear-gradient(180deg, #12243c 0%, #1B2D4E 45%, #244468 100%);
 }
 
 /* Reduced motion: disable our reveal transforms */
