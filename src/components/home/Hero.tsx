@@ -29,14 +29,16 @@ export function Hero({ headline, subhead }: { headline?: string; subhead?: strin
           <p className="inline-flex items-center gap-2 rounded-full bg-foam/10 border border-foam/20 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.15em] text-ocean-light backdrop-blur-sm">
             <Heart size={13} /> A Grassroots Nonprofit
           </p>
-          <h1 className="mt-6 font-display font-extrabold text-4xl sm:text-5xl lg:text-6xl leading-[1.05] tracking-tight text-foam">
-            {headline ? headline : (
-              <>Empowering Youth Through{" "}<span className="text-sunset">Surf, Education &amp; Community</span></>
-            )}
-          </h1>
-          <p className="mt-6 text-lg leading-relaxed text-foam/90 md:ml-auto max-w-lg">
-            {subhead ?? "Creating opportunity for underserved communities through mentorship, learning spaces, and the transformative power of the ocean."}
-          </p>
+          {headline && (
+            <h1 className="mt-6 font-display font-extrabold text-4xl sm:text-5xl lg:text-6xl leading-[1.05] tracking-tight text-foam">
+              {headline}
+            </h1>
+          )}
+          {subhead && (
+            <p className="mt-6 text-lg leading-relaxed text-foam/90 md:ml-auto max-w-lg">
+              {subhead}
+            </p>
+          )}
           <div className="mt-9">
             <JoinTheStoke />
           </div>
