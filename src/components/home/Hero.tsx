@@ -1,7 +1,7 @@
 import Image from "next/image";
-import { ArrowRight, Heart } from "lucide-react";
+import { Heart } from "lucide-react";
 import { Container } from "@/components/shared/Container";
-import { Button } from "@/components/shared/Button";
+import { JoinTheStoke } from "@/components/home/JoinTheStoke";
 
 export function Hero() {
   return (
@@ -37,18 +37,8 @@ export function Hero() {
             Creating opportunity for underserved communities through mentorship, learning spaces,
             and the transformative power of the ocean.
           </p>
-          <div className="mt-9 flex flex-col sm:flex-row gap-4 md:justify-end">
-            <Button href="/donate/" variant="sunset" size="lg">
-              Donate Now <ArrowRight size={18} />
-            </Button>
-            <Button
-              href="/get-involved/"
-              variant="secondary"
-              size="lg"
-              className="bg-foam/10 border-foam/30 text-foam hover:bg-foam/20"
-            >
-              Get Involved
-            </Button>
+          <div className="mt-9">
+            <JoinTheStoke />
           </div>
         </div>
       </Container>

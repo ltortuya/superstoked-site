@@ -290,3 +290,11 @@ export const callsToAction = {
   finalBody:
     "Every board, book, and hour you give ripples further than you'll ever see. Join us — as a donor, a volunteer, or a partner — and help build something coastal communities actually asked for.",
 };
+
+export const joinTheStoke = {
+  eyebrow: "Join the Stoke",
+  headline: "Help create opportunity through surfing, education, and community.",
+  subhead:
+    "Join our growing community of surfers, supporters, volunteers, and donors helping underserved youth in California and the Philippines.",
+  success: "Thanks for joining the Stoke — check your inbox to confirm.",
+} as const;
