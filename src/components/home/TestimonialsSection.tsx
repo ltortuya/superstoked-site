@@ -2,9 +2,10 @@ import { Quote } from "lucide-react";
 import { Container } from "@/components/shared/Container";
 import { SectionHeading } from "@/components/shared/SectionHeading";
 import { RevealOnScroll } from "@/components/shared/RevealOnScroll";
-import { testimonials } from "@/lib/content";
+import type { Testimonial } from "@/sanity/types";
 
-export function TestimonialsSection() {
+export function TestimonialsSection({ testimonials }: { testimonials: Testimonial[] }) {
+  if (!testimonials?.length) return null;
   return (
     <section className="py-20 sm:py-28 bg-sand">
       <Container>

@@ -3,7 +3,7 @@ import { Heart } from "lucide-react";
 import { Container } from "@/components/shared/Container";
 import { JoinTheStoke } from "@/components/home/JoinTheStoke";
 
-export function Hero() {
+export function Hero({ headline, subhead }: { headline?: string; subhead?: string }) {
   return (
     <section className="relative min-h-[88vh] w-full flex items-end overflow-hidden bg-ocean-deep -mt-16 sm:-mt-20">
       <Image
@@ -30,12 +30,12 @@ export function Hero() {
             <Heart size={13} /> A Grassroots Nonprofit
           </p>
           <h1 className="mt-6 font-display font-extrabold text-4xl sm:text-5xl lg:text-6xl leading-[1.05] tracking-tight text-foam">
-            Empowering Youth Through{" "}
-            <span className="text-sunset">Surf, Education &amp; Community</span>
+            {headline ? headline : (
+              <>Empowering Youth Through{" "}<span className="text-sunset">Surf, Education &amp; Community</span></>
+            )}
           </h1>
           <p className="mt-6 text-lg leading-relaxed text-foam/90 md:ml-auto max-w-lg">
-            Creating opportunity for underserved communities through mentorship, learning spaces,
-            and the transformative power of the ocean.
+            {subhead ?? "Creating opportunity for underserved communities through mentorship, learning spaces, and the transformative power of the ocean."}
           </p>
           <div className="mt-9">
             <JoinTheStoke />

@@ -1,9 +1,9 @@
 import { Container } from "@/components/shared/Container";
 import { RevealOnScroll } from "@/components/shared/RevealOnScroll";
 import { Button } from "@/components/shared/Button";
-import { callsToAction } from "@/lib/content";
 
-export function FinalCTA() {
+export function FinalCTA({ headline, body }: { headline?: string; body?: string }) {
+  if (!headline) return null;
   return (
     <section className="relative overflow-hidden ocean-gradient text-foam py-24 sm:py-32">
       <svg
@@ -17,12 +17,12 @@ export function FinalCTA() {
       <Container className="relative text-center">
         <RevealOnScroll>
           <h2 className="font-display text-4xl sm:text-5xl lg:text-6xl tracking-tight leading-[1.05] text-foam max-w-3xl mx-auto">
-            {callsToAction.finalHeadline}
+            {headline}
           </h2>
         </RevealOnScroll>
         <RevealOnScroll delay={120}>
           <p className="mt-6 text-lg sm:text-xl text-foam/85 max-w-2xl mx-auto leading-relaxed">
-            {callsToAction.finalBody}
+            {body}
           </p>
         </RevealOnScroll>
         <RevealOnScroll delay={220}>

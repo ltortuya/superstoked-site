@@ -3,12 +3,13 @@ import { Container } from "@/components/shared/Container";
 import { RevealOnScroll } from "@/components/shared/RevealOnScroll";
 import { Button } from "@/components/shared/Button";
 import { ImagePlaceholder } from "@/components/shared/ImagePlaceholder";
-import { featuredProject } from "@/lib/content";
+import type { FeaturedProjectContent } from "@/sanity/types";
 
-export function FeaturedProject() {
+export function FeaturedProject({ featuredProject }: { featuredProject: (Omit<FeaturedProjectContent, "body"> & { body?: string[]; ctaHref?: string }) | undefined }) {
+  if (!featuredProject?.title) return null;
   const pct = Math.min(
     100,
-    Math.round((featuredProject.progressRaised / featuredProject.progressGoal) * 100)
+    Math.round(((featuredProject.progressRaised ?? 0) / (featuredProject.progressGoal ?? 1)) * 100)
   );
 
   return (
@@ -17,7 +18,7 @@ export function FeaturedProject() {
         <div className="grid gap-12 lg:gap-16 lg:grid-cols-2 items-center">
           <RevealOnScroll>
             <ImagePlaceholder
-              label={featuredProject.imageAlt}
+              label={featuredProject.imageAlt ?? ""}
               aspect="4/3"
               tone="ocean"
               className="shadow-xl"
@@ -38,7 +39,7 @@ export function FeaturedProject() {
                 {featuredProject.lead}
               </p>
               <div className="mt-6 space-y-3 text-[0.95rem] leading-relaxed text-ink-soft">
-                {featuredProject.body.map((p, i) => (
+                {(featuredProject.body ?? []).map((p, i) => (
                   <p key={i}>{p}</p>
                 ))}
               </div>
@@ -51,9 +52,9 @@ export function FeaturedProject() {
                   </span>
                   <span className="text-ink-soft">
                     <span className="font-semibold text-ocean-deep">
-                      ${featuredProject.progressRaised.toLocaleString()}
+                      ${(featuredProject.progressRaised ?? 0).toLocaleString()}
                     </span>{" "}
-                    of ${featuredProject.progressGoal.toLocaleString()}
+                    of ${(featuredProject.progressGoal ?? 0).toLocaleString()}
                   </span>
                 </div>
                 <div className="mt-3 h-3 w-full overflow-hidden rounded-full bg-ocean-deep/10">
