@@ -1,24 +1,18 @@
 "use client";
 
 import Script from "next/script";
-import { useEffect, useState } from "react";
-import { getConsent } from "@/lib/consent";
+import { useSyncExternalStore } from "react";
+import { getConsent, subscribeConsent } from "@/lib/consent";
 
 const GA_ID = process.env.NEXT_PUBLIC_GA_ID || "";
 
 // Renders GA4 only when an ID is configured AND consent === "granted".
-// Listens for a window event so the banner can flip it on without a reload.
+// useSyncExternalStore reads consent client-side without an effect, so it stays
+// SSR-safe (server snapshot is "unset") and flips on the moment the banner accepts.
 export function Analytics() {
-  const [granted, setGranted] = useState(false);
+  const consent = useSyncExternalStore(subscribeConsent, getConsent, () => "unset");
 
-  useEffect(() => {
-    setGranted(getConsent() === "granted");
-    const onChange = () => setGranted(getConsent() === "granted");
-    window.addEventListener("ssf-consent-change", onChange);
-    return () => window.removeEventListener("ssf-consent-change", onChange);
-  }, []);
-
-  if (!GA_ID || !granted) return null;
+  if (!GA_ID || consent !== "granted") return null;
 
   return (
     <>

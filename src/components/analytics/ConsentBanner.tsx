@@ -1,22 +1,17 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { getConsent, setConsent } from "@/lib/consent";
+import { useSyncExternalStore } from "react";
+import { getConsent, setConsent, subscribeConsent } from "@/lib/consent";
 
 export function ConsentBanner() {
-  const [visible, setVisible] = useState(false);
-
-  useEffect(() => {
-    setVisible(getConsent() === "unset");
-  }, []);
+  const consent = useSyncExternalStore(subscribeConsent, getConsent, () => "unset");
 
   function choose(value: "granted" | "denied") {
     setConsent(value);
     window.dispatchEvent(new Event("ssf-consent-change"));
-    setVisible(false);
   }
 
-  if (!visible) return null;
+  if (consent !== "unset") return null;
 
   return (
     <div
