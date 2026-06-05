@@ -46,7 +46,7 @@ export function Nav() {
       }`}
     >
       <div className="mx-auto max-w-6xl px-5 sm:px-8 flex h-16 sm:h-20 items-center justify-between">
-        <Logo />
+        <Logo tone={scrolled ? "dark" : "light"} />
         <nav aria-label="Primary" className="hidden lg:flex items-center gap-1">
           {site.nav.map((item) => (
             <Link
@@ -54,8 +54,12 @@ export function Nav() {
               href={item.href}
               className={`px-3 py-2 text-sm font-medium rounded-full transition-colors ${
                 isActive(item.href)
-                  ? "text-ocean-deep bg-ocean-deep/5"
-                  : "text-ink-soft hover:text-ocean-deep hover:bg-ocean-deep/5"
+                  ? scrolled
+                    ? "text-ocean-deep bg-ocean-deep/5"
+                    : "text-foam bg-foam/15"
+                  : scrolled
+                    ? "text-ink-soft hover:text-ocean-deep hover:bg-ocean-deep/5"
+                    : "text-foam/90 hover:text-foam hover:bg-foam/10"
               }`}
             >
               {item.label}
@@ -63,13 +67,15 @@ export function Nav() {
           ))}
           <div className="ml-3">
             <Button href="/donate/" variant="sunset" size="sm">
-              Donate
+              Support SSF
             </Button>
           </div>
         </nav>
         <button
           type="button"
-          className="lg:hidden inline-flex items-center justify-center h-11 w-11 rounded-full text-ocean-deep hover:bg-ocean-deep/5"
+          className={`lg:hidden inline-flex items-center justify-center h-11 w-11 rounded-full ${
+            scrolled ? "text-ocean-deep hover:bg-ocean-deep/5" : "text-foam hover:bg-foam/10"
+          }`}
           onClick={() => setMenuOpen((v) => !v)}
           aria-expanded={menuOpen}
           aria-controls="mobile-menu"
