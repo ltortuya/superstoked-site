@@ -30,10 +30,20 @@ export async function sanityFetch<T>(query: string, params: Record<string, unkno
   if (!sanityEnabled) {
     return [] as unknown as T;
   }
-  return client.fetch<T>(query, params, {
-    next: {
-      revalidate: 60,
-      tags: tag ? [tag] : undefined,
-    },
-  });
+  try {
+    return await client.fetch<T>(query, params, {
+      next: {
+        revalidate: 60,
+        tags: tag ? [tag] : undefined,
+      },
+    });
+  } catch (err) {
+    // Never let a Sanity error (wrong project/dataset, network, 404) crash the
+    // build or a page render — log and fall back to empty content.
+    console.warn(
+      `[sanityFetch] query failed, returning empty:`,
+      err instanceof Error ? err.message : err,
+    );
+    return [] as unknown as T;
+  }
 }
