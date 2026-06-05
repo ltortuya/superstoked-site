@@ -2,8 +2,8 @@
 
 import { useState } from "react";
 import { Send, Check } from "lucide-react";
-
-const NEWSLETTER_ENDPOINT = process.env.NEXT_PUBLIC_FORMSPREE_NEWSLETTER || "";
+import { subscribe } from "@/lib/subscribe";
+import { trackEvent } from "@/lib/track";
 
 export function NewsletterSignup() {
   const [email, setEmail] = useState("");
@@ -13,21 +13,12 @@ export function NewsletterSignup() {
     e.preventDefault();
     if (!email) return;
     setStatus("loading");
-    try {
-      if (NEWSLETTER_ENDPOINT) {
-        const res = await fetch(NEWSLETTER_ENDPOINT, {
-          method: "POST",
-          headers: { "Content-Type": "application/json", Accept: "application/json" },
-          body: JSON.stringify({ email, source: "newsletter-footer" }),
-        });
-        if (!res.ok) throw new Error("Signup failed");
-      } else {
-        // No endpoint configured yet — simulate success for preview builds.
-        await new Promise((r) => setTimeout(r, 600));
-      }
+    const r = await subscribe({ email, interests: ["updates"], source: "footer" });
+    if (r.ok) {
+      trackEvent("newsletter_signup", { source: "footer" });
       setStatus("ok");
       setEmail("");
-    } catch {
+    } else {
       setStatus("err");
     }
   }
