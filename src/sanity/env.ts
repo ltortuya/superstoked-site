@@ -1,20 +1,20 @@
-// Env values are trimmed so a stray space/newline from a dashboard paste can't
-// break anything. A projectId that isn't a valid Sanity ID (lowercase a-z, 0-9,
-// dashes) is treated as "not configured" rather than crashing the build.
+// The SSF Sanity project ID and dataset are public and permanent (the projectId
+// already ships in the public Studio config and client bundles), so they are
+// hardcoded here. This intentionally ignores NEXT_PUBLIC_SANITY_* env vars for
+// project/dataset so a dashboard typo (e.g. "3s51u1k9" vs "3s51ulk9") can't
+// break content. apiVersion stays overridable via env for flexibility.
+export const projectId = "3s51ulk9";
+export const dataset = "production";
+
 export const apiVersion = (
   process.env.NEXT_PUBLIC_SANITY_API_VERSION || "2025-01-01"
 ).trim();
-
-export const dataset = (process.env.NEXT_PUBLIC_SANITY_DATASET || "production").trim();
-
-const rawProjectId = (process.env.NEXT_PUBLIC_SANITY_PROJECT_ID || "").trim();
-export const projectId = /^[a-z0-9-]+$/.test(rawProjectId) ? rawProjectId : "";
 
 // `useCdn` false because we mostly use ISR for caching; Sanity's CDN adds a
 // second layer we don't need and can delay fresh content.
 export const useCdn = false;
 
-// Feature flag: when false, Sanity-backed UI falls back gracefully (empty lists,
-// placeholder markers) so the site builds and renders even before Sanity is
-// correctly configured.
-export const sanityEnabled = Boolean(projectId);
+// Sanity is always configured now (hardcoded project). sanityFetch still catches
+// any runtime error and falls back to empty content, so a Sanity outage or a bad
+// query can never crash a build or page render.
+export const sanityEnabled = true;
