@@ -3,7 +3,7 @@ export const site = {
   tagline: "Empowering Youth Through Surf, Education & Community",
   description:
     "Superstoked Foundation empowers underserved coastal youth through surf mentorship, education, and community support — from Alimanguan, Palawan to California.",
-  url: "https://superstokedfoundation.org",
+  url: "https://superstokedfoundation.com",
   email: "hello@superstokedfoundation.org",
   ein: "REPLACE_WITH_EIN", // 501(c)(3) EIN — edit in src/lib/site.ts
   addressLine: "California, USA",
