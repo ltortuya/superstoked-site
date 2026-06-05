@@ -7,8 +7,8 @@ import { PartnersSection } from "@/components/home/PartnersSection";
 import { TestimonialsSection } from "@/components/home/TestimonialsSection";
 import { FinalCTA } from "@/components/home/FinalCTA";
 import { sanityFetch } from "@/sanity/client";
-import { featuredEventsQuery, recentEventsQuery } from "@/sanity/queries";
-import type { Event } from "@/sanity/types";
+import { featuredEventsQuery, recentEventsQuery, homePageQuery, partnersQuery, testimonialsQuery } from "@/sanity/queries";
+import type { Event, HomePageContent, Partner, Testimonial } from "@/sanity/types";
 
 export const revalidate = 60;
 
@@ -21,16 +21,23 @@ export default async function Home() {
       ? featured
       : await sanityFetch<Event[]>(recentEventsQuery, { limit: 3 }, "events");
 
+  const hp = await sanityFetch<HomePageContent | null>(homePageQuery, {}, "homePage");
+  const partners = await sanityFetch<Partner[]>(partnersQuery, {}, "partner");
+  const testimonials = await sanityFetch<Testimonial[]>(testimonialsQuery, {}, "testimonial");
+  const home = Array.isArray(hp) ? null : hp;
+  const paras = (s?: string) => (s ? s.split(/\n\s*\n/).map((p) => p.trim()).filter(Boolean) : []);
+  const fp = home?.featuredProject;
+
   return (
     <>
-      <Hero />
-      <MissionSection />
-      <WhatWeDo />
-      <FeaturedProject />
+      <Hero headline={home?.heroHeadline} subhead={home?.heroSubhead} />
+      <MissionSection mission={{ headline: home?.missionHeading, body: paras(home?.missionBody) }} />
+      <WhatWeDo whatWeDo={home?.whatWeDoItems ?? []} />
+      <FeaturedProject featuredProject={fp ? { ...fp, body: paras(fp.body), ctaHref: fp.ctaUrl } : undefined} />
       <EventsStrip events={events} />
-      <PartnersSection />
-      <TestimonialsSection />
-      <FinalCTA />
+      <PartnersSection partners={partners} />
+      <TestimonialsSection testimonials={testimonials} />
+      <FinalCTA headline={home?.finalCtaHeadline} body={home?.finalCtaBody} />
     </>
   );
 }

@@ -1,9 +1,10 @@
 import { Container } from "@/components/shared/Container";
 import { SectionHeading } from "@/components/shared/SectionHeading";
 import { RevealOnScroll } from "@/components/shared/RevealOnScroll";
-import { partners } from "@/lib/content";
+import type { Partner } from "@/sanity/types";
 
-export function PartnersSection() {
+export function PartnersSection({ partners }: { partners: Partner[] }) {
+  if (!partners?.length) return null;
   return (
     <section className="py-20 sm:py-24 bg-ocean-deep text-foam">
       <Container>

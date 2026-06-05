@@ -3,7 +3,7 @@ import { Container } from "@/components/shared/Container";
 import { SectionHeading } from "@/components/shared/SectionHeading";
 import { RevealOnScroll } from "@/components/shared/RevealOnScroll";
 import { Card } from "@/components/shared/Card";
-import { whatWeDo } from "@/lib/content";
+import type { WhatWeDoItem } from "@/sanity/types";
 
 const iconMap = {
   book: BookOpen,
@@ -12,7 +12,8 @@ const iconMap = {
   globe: Globe2,
 };
 
-export function WhatWeDo() {
+export function WhatWeDo({ whatWeDo }: { whatWeDo: WhatWeDoItem[] }) {
+  if (!whatWeDo?.length) return null;
   return (
     <section className="py-20 sm:py-28 bg-sand">
       <Container>

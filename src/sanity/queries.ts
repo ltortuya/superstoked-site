@@ -43,3 +43,32 @@ export const eventBySlugQuery = groq`
 export const eventSlugsQuery = groq`
   *[_type == "event" && defined(slug.current)][].slug.current
 `;
+
+export const homePageQuery = groq`
+  *[_type == "homePage"][0] {
+    heroHeadline,
+    heroSubhead,
+    missionEyebrow,
+    missionHeading,
+    missionBody,
+    whatWeDoItems[]{ title, body, icon },
+    featuredProject {
+      badge, title, lead, body, imageAlt, progressLabel, progressRaised, progressGoal, ctaLabel, ctaUrl,
+      "image": image
+    },
+    finalCtaHeadline,
+    finalCtaBody
+  }
+`;
+
+export const partnersQuery = groq`
+  *[_type == "partner"] | order(order asc, _createdAt asc) {
+    name, location, description
+  }
+`;
+
+export const testimonialsQuery = groq`
+  *[_type == "testimonial"] | order(order asc, _createdAt asc) {
+    quote, attribution, role
+  }
+`;

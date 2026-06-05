@@ -15,6 +15,7 @@ export const homePageType = defineType({
     { name: "merch", title: "Merch / Shop" },
     { name: "getInvolved", title: "Get Involved" },
     { name: "footer", title: "Footer" },
+    { name: "nextHome", title: "Homepage (Next site)" },
   ],
   fields: [
     // ---------------- HEADER / NAV / SEO ----------------
@@ -553,6 +554,59 @@ export const homePageType = defineType({
       type: "string",
       group: "footer",
     }),
+
+    // ---------------- HOMEPAGE (NEXT SITE) ----------------
+    defineField({
+      name: "whatWeDoItems",
+      title: "What We Do — cards",
+      type: "array",
+      group: "nextHome",
+      of: [
+        {
+          type: "object",
+          fields: [
+            defineField({ name: "title", title: "Title", type: "string", validation: (r) => r.required() }),
+            defineField({ name: "body", title: "Body", type: "text", rows: 3 }),
+            defineField({
+              name: "icon",
+              title: "Icon",
+              type: "string",
+              options: { list: [
+                { title: "Book", value: "book" },
+                { title: "Waves", value: "waves" },
+                { title: "Handshake", value: "handshake" },
+                { title: "Globe", value: "globe" },
+              ] },
+            }),
+          ],
+          preview: { select: { title: "title", subtitle: "icon" } },
+        },
+      ],
+    }),
+    defineField({
+      name: "featuredProject",
+      title: "Featured Project",
+      type: "object",
+      group: "nextHome",
+      fields: [
+        defineField({ name: "badge", title: "Badge label", type: "string" }),
+        defineField({ name: "title", title: "Title", type: "string" }),
+        defineField({ name: "lead", title: "Lead paragraph", type: "text", rows: 2 }),
+        defineField({ name: "body", title: "Body (blank line between paragraphs)", type: "text", rows: 5 }),
+        defineField({ name: "image", title: "Image", type: "image", options: { hotspot: true } }),
+        defineField({ name: "imageAlt", title: "Image alt text", type: "string" }),
+        defineField({ name: "progressLabel", title: "Progress bar label", type: "string" }),
+        defineField({ name: "progressRaised", title: "Amount raised", type: "number" }),
+        defineField({ name: "progressGoal", title: "Goal amount", type: "number" }),
+        defineField({ name: "ctaLabel", title: "Button label", type: "string" }),
+        defineField({ name: "ctaUrl", title: "Button URL", type: "string" }),
+      ],
+    }),
+    defineField({ name: "finalCtaHeadline", title: "Final CTA — headline", type: "string", group: "nextHome" }),
+    defineField({ name: "finalCtaBody", title: "Final CTA — body", type: "text", rows: 3, group: "nextHome" }),
+    defineField({ name: "joinStokeEyebrow", title: "Join the Stoke — eyebrow", type: "string", group: "nextHome" }),
+    defineField({ name: "joinStokeHeadline", title: "Join the Stoke — headline", type: "text", rows: 2, group: "nextHome" }),
+    defineField({ name: "joinStokeSubhead", title: "Join the Stoke — subhead", type: "text", rows: 3, group: "nextHome" }),
   ],
   preview: {
     prepare() {

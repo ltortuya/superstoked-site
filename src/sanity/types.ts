@@ -41,3 +41,34 @@ export const PROGRAM_LABELS: Record<EventProgram, string> = {
   equipment: "Equipment Donations",
   other: "Other",
 };
+
+export type WhatWeDoItem = { title: string; body?: string; icon?: string };
+
+export type FeaturedProjectContent = {
+  badge?: string;
+  title?: string;
+  lead?: string;
+  body?: string;
+  image?: SanityImage;
+  imageAlt?: string;
+  progressLabel?: string;
+  progressRaised?: number;
+  progressGoal?: number;
+  ctaLabel?: string;
+  ctaUrl?: string;
+};
+
+export type HomePageContent = {
+  heroHeadline?: string;
+  heroSubhead?: string;
+  missionEyebrow?: string;
+  missionHeading?: string;
+  missionBody?: string;
+  whatWeDoItems?: WhatWeDoItem[];
+  featuredProject?: FeaturedProjectContent;
+  finalCtaHeadline?: string;
+  finalCtaBody?: string;
+};
+
+export type Partner = { name: string; location?: string; description?: string };
+export type Testimonial = { quote: string; attribution: string; role?: string };
